@@ -19,4 +19,4 @@ export default function EditEmployee() {
   }
 
   return <EmployeeForm employeeId={id} isEdit={true} />;
-}
+}  
