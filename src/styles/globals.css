@@ -1,6 +1,6 @@
 @import "tailwindcss";
+@import "@fortawesome/fontawesome-svg-core/styles.css";
 
-/* Custom styles for the Employee Management Dashboard */
 
 :root {
   --background: #ffffff;
@@ -29,7 +29,6 @@ html, body {
   overflow: hidden;
 }
 
-/* Input field fixes */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -46,7 +45,6 @@ input[type="password"]::placeholder {
   color: #6b7280 !important;
 }
 
-/* Custom toggle switch styles */
 .toggle-switch {
   position: relative;
   display: inline-flex;

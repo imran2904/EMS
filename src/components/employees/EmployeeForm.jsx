@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserEdit, faUserPlus, faUser, faUpload, faSpinner, faSave, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { STATES, GENDER_OPTIONS } from '@/lib/constants';
 import { addEmployee, updateEmployee, getEmployeeById } from '@/lib/storage';
 import { convertImageToBase64, showToast } from '@/lib/utils';
@@ -105,7 +107,7 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
     <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-900 flex items-center">
-          <i className={`fas ${isEdit ? 'fa-user-edit' : 'fa-user-plus'} mr-3 text-indigo-600`}></i>
+          <FontAwesomeIcon icon={isEdit ? faUserEdit : faUserPlus} className="mr-3 text-indigo-600" />
           {isEdit ? 'Edit Employee' : 'Add New Employee'}
         </h2>
         <p className="text-gray-600 mt-2">
@@ -128,7 +130,7 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <i className="fas fa-user text-gray-400 text-2xl"></i>
+                <FontAwesomeIcon icon={faUser} className="text-gray-400 text-2xl" />
               )}
             </div>
             <div>
@@ -143,7 +145,7 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
                 htmlFor="profileImage"
                 className="cursor-pointer bg-white border border-gray-300 rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
-                <i className="fas fa-upload mr-2"></i>
+                <FontAwesomeIcon icon={faUpload} className="mr-2" />
                 {imagePreview ? 'Change Image' : 'Upload Image'}
               </label>
               <p className="text-xs text-gray-500 mt-1">PNG, JPG up to 5MB</p>
@@ -264,12 +266,12 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
           >
             {isLoading ? (
               <div className="flex items-center">
-                <i className="fas fa-spinner fa-spin mr-2"></i>
+                <FontAwesomeIcon icon={faSpinner} className="mr-2 animate-spin" />
                 {isEdit ? 'Updating...' : 'Adding...'}
               </div>
             ) : (
               <>
-                <i className={`fas ${isEdit ? 'fa-save' : 'fa-plus'} mr-2`}></i>
+                <FontAwesomeIcon icon={isEdit ? faSave : faPlus} className="mr-2" />
                 {isEdit ? 'Update Employee' : 'Add Employee'}
               </>
             )}

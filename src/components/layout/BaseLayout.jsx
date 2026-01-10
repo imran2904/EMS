@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getAuth } from '@/lib/storage';
 import { ROUTES } from '@/lib/constants';
-import Sidebar from './Sidebar';
-import Header from './Header';
+import Sidebar from '../Sidebar/Sidebar';
+import Header from '../Header/Header';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const BaseLayout = ({ children }) => {
   const router = useRouter();
@@ -25,7 +27,6 @@ const BaseLayout = ({ children }) => {
     checkAuth();
   }, [router]);
 
-  // Pages where sidebar and header should not be rendered
   const noLayoutPages = ['/login', '/'];
 
   const shouldShowLayout = isAuthenticated && !noLayoutPages.includes(router.pathname);
@@ -34,30 +35,26 @@ const BaseLayout = ({ children }) => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <i className="fas fa-spinner fa-spin text-4xl text-indigo-600 mb-4"></i>
+          <FontAwesomeIcon icon={faSpinner} spin className="text-4xl text-indigo-600 mb-4" />
           <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );
   }
 
-  // If no layout needed (login page, etc.)
   if (!shouldShowLayout) {
     return <div className="min-h-screen bg-gray-50">{children}</div>;
   }
 
-  // Dashboard layout with sidebar and header
   return (
-    <div className="h-screen flex bg-gray-50 overflow-hidden">
+    <div className="h-screen w-full flex bg-gray-50">
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       
-      {/* Main content */}
-      <div className="flex-1 flex flex-col min-w-0 h-screen">
+      <div className="flex-1 w-full flex flex-col min-w-0 h-screen">
         <Header setSidebarOpen={setSidebarOpen} />
         
-        {/* Page content */}
-        <main className="flex-1 overflow-y-auto bg-gray-50 min-h-0">
-          <div className="p-6 h-full">
+        <main className="flex-1 w-full overflow-y-auto bg-gray-50">
+          <div className="p-3 sm:p-6 h-full w-full">
             {children}
           </div>
         </main>

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
 import ConfirmModal from '@/components/ui/ConfirmModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUsers, faEdit, faTrash, faPrint, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function EmployeeTable({ 
   employees, 
@@ -104,7 +106,7 @@ export default function EmployeeTable({
   if (filteredEmployees.length === 0) {
     return (
       <div className="bg-white rounded-lg shadow-md p-8 text-center">
-        <i className="fas fa-users text-gray-300 text-6xl mb-4"></i>
+        <FontAwesomeIcon icon={faUsers} className="text-gray-300 text-6xl mb-4" />
         <h3 className="text-lg font-medium text-gray-900 mb-2">No employees found</h3>
         <p className="text-gray-500 mb-4">
           {employees.length === 0 
@@ -117,7 +119,7 @@ export default function EmployeeTable({
             href="/dashboard/add"
             className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
           >
-            <i className="fas fa-plus mr-2"></i>
+            <FontAwesomeIcon icon={faPlus} className="mr-2" />
             Add Employee
           </Link>
         )}
@@ -132,22 +134,22 @@ export default function EmployeeTable({
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                   Employee
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                   Gender
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                   Date of Birth
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                   State
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                   Actions
                 </th>
               </tr>
@@ -155,35 +157,35 @@ export default function EmployeeTable({
             <tbody className="bg-white divide-y divide-gray-200">
               {filteredEmployees.map((employee) => (
                 <tr key={employee.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="flex-shrink-0 h-12 w-12">
+                      <div className="flex-shrink-0 h-10 w-10 sm:h-12 sm:w-12">
                         <img
-                          className="h-12 w-12 rounded-full object-cover"
+                          className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover"
                           src={employee.profileImage}
                           alt={employee.fullName}
                         />
                       </div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">
+                      <div className="ml-3 sm:ml-4">
+                        <div className="text-xs sm:text-sm font-medium text-gray-900">
                           {employee.fullName}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div className="text-xs text-gray-500">
                           {employee.id}
                         </div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
                     {employee.gender}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
                     {formatDate(employee.dob)}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
                     {employee.state}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
                     <label className="flex items-center cursor-pointer">
                       <input
                         type="checkbox"
@@ -191,42 +193,42 @@ export default function EmployeeTable({
                         onChange={() => onToggleStatus(employee.id)}
                         className="sr-only"
                       />
-                      <div className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                      <div className={`relative inline-flex h-5 w-9 sm:h-6 sm:w-11 items-center rounded-full transition-colors ${
                         employee.isActive ? 'bg-indigo-600' : 'bg-gray-200'
                       }`}>
-                        <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                          employee.isActive ? 'translate-x-6' : 'translate-x-1'
+                        <span className={`inline-block h-3 w-3 sm:h-4 sm:w-4 transform rounded-full bg-white transition-transform ${
+                          employee.isActive ? 'translate-x-5 sm:translate-x-6' : 'translate-x-1'
                         }`} />
                       </div>
-                      <span className={`ml-2 text-sm ${
+                      <span className={`ml-2 text-xs sm:text-sm ${
                         employee.isActive ? 'text-green-600' : 'text-red-600'
                       }`}>
                         {employee.isActive ? 'Active' : 'Inactive'}
                       </span>
                     </label>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <div className="flex items-center space-x-2">
+                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <div className="flex items-center space-x-1 sm:space-x-2">
                       <Link
                         href={`/dashboard/edit/${employee.id}`}
-                        className="text-indigo-600 hover:text-indigo-900 p-2 rounded-lg hover:bg-indigo-50"
+                        className="text-indigo-600 hover:text-indigo-900 p-1 sm:p-2 rounded-lg hover:bg-indigo-50"
                         title="Edit Employee"
                       >
-                        <i className="fas fa-edit"></i>
+                        <FontAwesomeIcon icon={faEdit} className="text-xs sm:text-sm" />
                       </Link>
                       <button
                         onClick={() => handleDeleteClick(employee)}
-                        className="text-red-600 hover:text-red-900 p-2 rounded-lg hover:bg-red-50"
+                        className="text-red-600 hover:text-red-900 p-1 sm:p-2 rounded-lg hover:bg-red-50"
                         title="Delete Employee"
                       >
-                        <i className="fas fa-trash"></i>
+                        <FontAwesomeIcon icon={faTrash} className="text-xs sm:text-sm" />
                       </button>
                       <button
                         onClick={() => handlePrintEmployee(employee)}
-                        className="text-gray-600 hover:text-gray-900 p-2 rounded-lg hover:bg-gray-50"
+                        className="text-gray-600 hover:text-gray-900 p-1 sm:p-2 rounded-lg hover:bg-gray-50"
                         title="Print Employee"
                       >
-                        <i className="fas fa-print"></i>
+                        <FontAwesomeIcon icon={faPrint} className="text-xs sm:text-sm" />
                       </button>
                     </div>
                   </td>

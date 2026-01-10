@@ -4,6 +4,8 @@ import EmployeeTable from '@/components/employees/EmployeeTable';
 import { getEmployees, deleteEmployee, updateEmployee, seedEmployees } from '@/lib/storage';
 import { showToast } from '@/lib/utils';
 import { GENDER_OPTIONS } from '@/lib/constants';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUsers, faUserCheck, faUserTimes, faPrint, faPlus, faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 export default function Dashboard() {
   const [employees, setEmployees] = useState([]);
@@ -123,7 +125,7 @@ export default function Dashboard() {
     return (
         <div className="flex items-center justify-center h-64">
           <div className="text-center">
-            <i className="fas fa-spinner fa-spin text-4xl text-indigo-600 mb-4"></i>
+            <FontAwesomeIcon icon={faSpinner} spin className="text-4xl text-indigo-600 mb-4" />
             <p className="text-gray-600">Loading employees...</p>
           </div>
         </div>
@@ -131,13 +133,13 @@ export default function Dashboard() {
   }
 
   return (
-      <div className="h-full flex flex-col space-y-6">
+      <div className="h-full w-full flex flex-col space-y-6">
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 flex-shrink-0">
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center">
               <div className="p-3 rounded-full bg-blue-100 text-blue-600">
-                <i className="fas fa-users text-2xl"></i>
+                <FontAwesomeIcon icon={faUsers} className="text-2xl" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Total Employees</p>
@@ -149,7 +151,7 @@ export default function Dashboard() {
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center">
               <div className="p-3 rounded-full bg-green-100 text-green-600">
-                <i className="fas fa-user-check text-2xl"></i>
+                <FontAwesomeIcon icon={faUserCheck} className="text-2xl" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Active Employees</p>
@@ -161,7 +163,7 @@ export default function Dashboard() {
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center">
               <div className="p-3 rounded-full bg-red-100 text-red-600">
-                <i className="fas fa-user-times text-2xl"></i>
+                <FontAwesomeIcon icon={faUserTimes} className="text-2xl" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Inactive Employees</p>
@@ -172,7 +174,7 @@ export default function Dashboard() {
         </div>
 
         {/* Employee Management Section */}
-        <div className="bg-white rounded-lg shadow-md p-6 flex-1 flex flex-col min-h-0">
+        <div className="bg-white w-full rounded-lg shadow-md p-6 flex-1 flex flex-col">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 flex-shrink-0">
             <h2 className="text-xl font-bold text-gray-900 mb-4 sm:mb-0">
               Employee Management
@@ -182,14 +184,14 @@ export default function Dashboard() {
                 onClick={handlePrintEmployees}
                 className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
-                <i className="fas fa-print mr-2"></i>
+                <FontAwesomeIcon icon={faPrint} className="mr-2" />
                 Print Employees
               </button>
               <Link
                 href="/dashboard/add"
                 className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
-                <i className="fas fa-plus mr-2"></i>
+                <FontAwesomeIcon icon={faPlus} className="mr-2" />
                 Add Employee
               </Link>
             </div>
@@ -203,7 +205,7 @@ export default function Dashboard() {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <i className="fas fa-search text-gray-400"></i>
+                  <FontAwesomeIcon icon={faSearch} className="text-gray-400" />
                 </div>
                 <input
                   type="text"
@@ -253,7 +255,7 @@ export default function Dashboard() {
           </div>
 
           {/* Employee Table */}
-          <div className="flex-1 min-h-0">
+          <div className="flex-1 w-full">
             <EmployeeTable
               employees={employees}
               onDelete={handleDeleteEmployee}

@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUsers, faTachometerAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const router = useRouter();
@@ -10,13 +12,13 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
     {
       name: 'Dashboard',
       href: '/dashboard',
-      icon: 'fas fa-tachometer-alt',
+      icon: faTachometerAlt,
       current: router.pathname === '/dashboard'
     },
     {
       name: 'Add Employee',
       href: '/dashboard/add',
-      icon: 'fas fa-user-plus',
+      icon: faUserPlus,
       current: router.pathname === '/dashboard/add' || router.pathname.startsWith('/dashboard/edit')
     }
   ], [router.pathname]);
@@ -34,7 +36,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
       <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl border-r border-gray-200 transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:flex lg:flex-col lg:w-64`}>
         <div className="flex items-center justify-center h-16 px-4 bg-gradient-to-r from-indigo-600 to-purple-600 flex-shrink-0">
           <div className="flex items-center">
-            <i className="fas fa-users text-white text-2xl mr-3"></i>
+            <FontAwesomeIcon icon={faUsers} className="text-white text-2xl mr-3" />
             <h1 className="text-white text-lg font-bold">EMS Dashboard</h1>
           </div>
         </div>
@@ -51,7 +53,10 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                   }`}
                 >
-                  <i className={`${item.icon} mr-3 text-lg ${item.current ? 'text-indigo-600' : 'text-gray-400'}`}></i>
+                  <FontAwesomeIcon 
+                    icon={item.icon} 
+                    className={`mr-3 text-lg ${item.current ? 'text-indigo-600' : 'text-gray-400'}`} 
+                  />
                   {item.name}
                 </Link>
               </li>

@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 export default function ConfirmModal({
   isOpen,
@@ -54,9 +56,9 @@ export default function ConfirmModal({
   const getIcon = () => {
     switch (type) {
       case 'danger':
-        return 'fas fa-exclamation-triangle';
+        return faExclamationTriangle;
       default:
-        return 'fas fa-question-circle';
+        return faQuestionCircle;
     }
   };
 
@@ -77,7 +79,7 @@ export default function ConfirmModal({
         >
           <div className="sm:flex sm:items-start">
             <div className={`mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full sm:mx-0 sm:h-10 sm:w-10 ${getIconStyles()}`}>
-              <i className={`${getIcon()} text-xl`}></i>
+              <FontAwesomeIcon icon={getIcon()} className="text-xl" />
             </div>
             <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
               <h3 className="text-lg leading-6 font-medium text-gray-900">
