@@ -246,6 +246,7 @@ export default function Dashboard() {
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-gray-900 bg-white"
+                style={{ border: '1px solid #d1d5db', borderRadius: '8px' }}
               >
                 <option value="All">All Status</option>
                 <option value="Active">Active</option>
