@@ -4,14 +4,15 @@ import { formatDate } from '@/lib/utils';
 import ConfirmModal from '@/components/ui/ConfirmModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faEdit, faTrash, faPrint, faPlus } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 
-export default function EmployeeTable({ 
-  employees, 
-  onDelete, 
+export default function EmployeeTable({
+  employees,
+  onDelete,
   onToggleStatus,
   searchTerm,
   genderFilter,
-  statusFilter 
+  statusFilter
 }) {
   const [deleteModal, setDeleteModal] = useState({ isOpen: false, employee: null });
 
@@ -86,7 +87,7 @@ export default function EmployeeTable({
         </body>
       </html>
     `;
-    
+
     printWindow.document.write(printContent);
     printWindow.document.close();
     printWindow.print();
@@ -96,10 +97,10 @@ export default function EmployeeTable({
   const filteredEmployees = employees.filter(employee => {
     const matchesSearch = employee.fullName.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesGender = genderFilter === 'All' || employee.gender === genderFilter;
-    const matchesStatus = statusFilter === 'All' || 
+    const matchesStatus = statusFilter === 'All' ||
       (statusFilter === 'Active' && employee.isActive) ||
       (statusFilter === 'Inactive' && !employee.isActive);
-    
+
     return matchesSearch && matchesGender && matchesStatus;
   });
 
@@ -109,7 +110,7 @@ export default function EmployeeTable({
         <FontAwesomeIcon icon={faUsers} className="text-gray-300 text-6xl mb-4" />
         <h3 className="text-lg font-medium text-gray-900 mb-2">No employees found</h3>
         <p className="text-gray-500 mb-4">
-          {employees.length === 0 
+          {employees.length === 0
             ? "Get started by adding your first employee."
             : "Try adjusting your search or filter criteria."
           }
@@ -129,113 +130,111 @@ export default function EmployeeTable({
 
   return (
     <>
-        <div className="overflow-x-auto bg-white rounded-lg shadow-md">
-            <table className="min-w-full text-nowrap divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Employee
-                  </th>
-                  <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Gender
-                  </th>
-                  <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Date of Birth
-                  </th>
-                  <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    State
-                  </th>
-                  <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {filteredEmployees.map((employee) => (
-                  <tr key={employee.id} className="hover:bg-gray-50">
-                    <td className="px-3 sm:px-6 py-3">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10">
-                          <img
-                            className="h-8 w-8 sm:h-10 sm:w-10 rounded-full object-cover"
-                            src={employee.profileImage}
-                            alt={employee.fullName}
-                          />
-                        </div>
-                        <div className="ml-2 sm:ml-3 min-w-0 flex-1">
-                          <div className="text-xs sm:text-sm font-medium text-gray-900 truncate">
-                            {employee.fullName}
-                          </div>
-                          <div className="text-xs text-gray-500 truncate">
-                            {employee.id}
-                          </div>
-                        </div>
+      <div className="overflow-x-auto bg-white rounded-lg shadow-md">
+        <table className="min-w-full   divide-y divide-gray-200">
+          <thead className="bg-gray-50 text-nowrap">
+            <tr>
+              <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Employee
+              </th>
+              <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Gender
+              </th>
+              <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Date of Birth
+              </th>
+              <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                State
+              </th>
+              <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Status
+              </th>
+              <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {filteredEmployees.map((employee) => (
+              <tr key={employee.id} className="hover:bg-gray-50">
+                <td className="px-3 sm:px-6 py-3">
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10">
+                      <img
+                        className="h-8 w-8 sm:h-10 sm:w-10 rounded-full object-cover"
+                        src={employee.profileImage}
+                        alt={employee.fullName}
+                      />
+                    </div>
+                    <div className="ml-2 sm:ml-3 min-w-0 flex-1">
+                      <div className="text-xs sm:text-sm font-medium text-gray-900 truncate">
+                        {employee.fullName}
                       </div>
-                    </td>
-                    <td className="px-3 sm:px-6 py-3 text-xs sm:text-sm text-gray-900">
-                      {employee.gender}
-                    </td>
-                    <td className="px-3 sm:px-6 py-3 text-xs sm:text-sm text-gray-900">
-                      {formatDate(employee.dob)}
-                    </td>
-                    <td className="px-3 sm:px-6 py-3 text-xs sm:text-sm text-gray-900">
-                      {employee.state}
-                    </td>
-                    <td className="px-3 sm:px-6 py-3">
-                      <label className="flex items-center cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={employee.isActive}
-                          onChange={() => onToggleStatus(employee.id)}
-                          className="sr-only"
-                        />
-                        <div className={`relative inline-flex h-4 w-7 sm:h-5 sm:w-9 items-center rounded-full transition-colors ${
-                          employee.isActive ? 'bg-indigo-600' : 'bg-gray-200'
-                        }`}>
-                          <span className={`inline-block h-2 w-2 sm:h-3 sm:w-3 transform rounded-full bg-white transition-transform ${
-                            employee.isActive ? 'translate-x-4 sm:translate-x-5' : 'translate-x-1'
-                          }`} />
-                        </div>
-                        <span className={`ml-1 sm:ml-2 text-xs ${
-                          employee.isActive ? 'text-green-600' : 'text-red-600'
-                        }`}>
-                          {employee.isActive ? 'Active' : 'Inactive'}
-                        </span>
-                      </label>
-                    </td>
-                    <td className="px-3 sm:px-6 py-3">
-                      <div className="flex items-center space-x-1">
-                        <Link
-                          href={`/dashboard/edit/${employee.id}`}
-                          className="text-indigo-600 hover:text-indigo-900 p-1 rounded hover:bg-indigo-50"
-                          title="Edit Employee"
-                        >
-                          <FontAwesomeIcon icon={faEdit} className="text-xs" />
-                        </Link>
-                        <button
-                          onClick={() => handleDeleteClick(employee)}
-                          className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50"
-                          title="Delete Employee"
-                        >
-                          <FontAwesomeIcon icon={faTrash} className="text-xs" />
-                        </button>
-                        <button
-                          onClick={() => handlePrintEmployee(employee)}
-                          className="text-gray-600 hover:text-gray-900 p-1 rounded hover:bg-gray-50"
-                          title="Print Employee"
-                        >
-                          <FontAwesomeIcon icon={faPrint} className="text-xs" />
-                        </button>
+                      <div className="text-xs text-gray-500 truncate">
+                        {employee.id}
                       </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-        </div>
+                    </div>
+                  </div>
+                </td>
+                <td className="px-3 sm:px-6 py-3 text-xs sm:text-sm text-gray-900">
+                  {employee.gender}
+                </td>
+                <td className="px-3 sm:px-6 py-3 text-xs sm:text-sm text-gray-900">
+                  {formatDate(employee.dob)}
+                </td>
+                <td className="px-3 sm:px-6 py-3 text-xs sm:text-sm text-gray-900">
+                  {employee.state}
+                </td>
+                <td className="px-3 sm:px-6 py-3">
+                  <label className="flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={employee.isActive}
+                      onChange={() => onToggleStatus(employee.id)}
+                      className="sr-only"
+                    />
+                    <div className={`relative inline-flex h-4 w-7 sm:h-5 sm:w-9 items-center rounded-full transition-colors ${employee.isActive ? 'bg-indigo-600' : 'bg-gray-200'
+                      }`}>
+                      <span className={`inline-block h-2 w-2 sm:h-3 sm:w-3 transform rounded-full bg-white transition-transform ${employee.isActive ? 'translate-x-4 sm:translate-x-5' : 'translate-x-1'
+                        }`} />
+                    </div>
+                    <span className={`ml-1 sm:ml-2 text-xs ${employee.isActive ? 'text-green-600' : 'text-red-600'
+                      }`}>
+                      {employee.isActive ? 'Active' : 'Inactive'}
+                    </span>
+                  </label>
+                </td>
+                <td className="px-3 sm:px-6 py-3">
+                  <div className="flex items-center space-x-1">
+                    <Link
+                      href={`/dashboard/edit/${employee.id}`}
+                      className="text-indigo-600 hover:text-indigo-900 p-1 rounded hover:bg-indigo-50"
+                      title="Edit Employee"
+                    >
+                      <FontAwesomeIcon icon={faEdit} className="text-xs" />
+                    </Link>
+                    <button
+                      onClick={() => handleDeleteClick(employee)}
+                      className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50"
+                      title="Delete Employee"
+                    >
+                      <FontAwesomeIcon icon={faTrash} className="text-xs" />
+                    </button>
+                    <button
+                      onClick={() => handlePrintEmployee(employee)}
+                      className="text-gray-600 hover:text-gray-900 p-1 rounded hover:bg-gray-50"
+                      title="Print Employee"
+                    >
+                      <FontAwesomeIcon icon={faPrint} className="text-xs" />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+  
 
       <ConfirmModal
         isOpen={deleteModal.isOpen}

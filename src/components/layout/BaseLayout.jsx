@@ -28,8 +28,21 @@ const BaseLayout = ({ children }) => {
   }, [router]);
 
   const noLayoutPages = ['/login', '/'];
-
   const shouldShowLayout = isAuthenticated && !noLayoutPages.includes(router.pathname);
+
+  // Add/remove dashboard-layout class to body
+  useEffect(() => {
+    if (shouldShowLayout) {
+      document.body.classList.add('dashboard-layout');
+    } else {
+      document.body.classList.remove('dashboard-layout');
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.classList.remove('dashboard-layout');
+    };
+  }, [shouldShowLayout]);
 
   if (isLoading) {
     return (
@@ -43,24 +56,30 @@ const BaseLayout = ({ children }) => {
   }
 
   if (!shouldShowLayout) {
-    return <div className="min-h-screen bg-gray-50">{children}</div>;
+    return (
+      <div className="min-h-screen bg-gray-50" style={{ overflow: 'auto', height: 'auto' }}>
+        {children}
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen w-full flex bg-gray-50 overflow-hidden">
+    <div className="h-screen w-full flex bg-gray-50 overflow-hidden">
+      {/* Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      
-      <div className="flex-1 flex flex-col h-screen overflow-hidden">
+
+      {/* Right side */}
+      <div className="flex flex-col flex-1 h-screen overflow-hidden">
         <Header setSidebarOpen={setSidebarOpen} />
-        
-        <main className="flex-1 overflow-y-auto bg-gray-50">
-          <div className="p-3 sm:p-6 h-full">
-            {children}
-          </div>
+
+        {/* ONLY MAIN will scroll */}
+        <main className="flex-1 overflow-y-auto p-6">
+          {children}
         </main>
       </div>
     </div>
   );
+
 };
 
 export default BaseLayout;

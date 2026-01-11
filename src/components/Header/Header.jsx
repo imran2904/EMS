@@ -15,9 +15,9 @@ export default function Header({ setSidebarOpen }) {
   };
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200 flex-shrink-0 z-10">
+    <header className="sticky w-full top-0 bg-white shadow-sm border-b border-gray-200  z-10">
       <div className="flex items-center justify-between px-3 sm:px-6 py-3 sm:py-4">
-        <div className="flex items-center min-w-0 flex-1">
+        <div className="flex items-center">
           <button
             onClick={() => setSidebarOpen(true)}
             className="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 transition-colors mr-2"

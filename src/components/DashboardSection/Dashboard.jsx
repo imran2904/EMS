@@ -174,7 +174,8 @@ export default function Dashboard() {
         </div>
 
         {/* Employee Management Section */}
-        <div className="bg-white w-full rounded-lg shadow-md p-6 flex-1 flex flex-col">
+        <div className="bg-white w-full  rounded-lg shadow-md p-6  flex flex-col">
+        
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 flex-shrink-0">
             <h2 className="text-xl font-bold text-gray-900 mb-4 sm:mb-0">
               Employee Management
