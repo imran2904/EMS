@@ -133,13 +133,13 @@ export default function Dashboard() {
   }
 
   return (
-      <div className="h-full w-full flex flex-col space-y-6">
+      <div className="space-y-6">
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 flex-shrink-0">
-          <div className="bg-white rounded-lg shadow-md p-3 lg:p-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+          <div className="bg-white rounded-lg shadow-md p-3 sm:p-4 lg:p-6">
             <div className="flex items-center">
               <div className="p-3 rounded-full bg-blue-100 text-blue-600">
-                <FontAwesomeIcon icon={faUsers} className="text-2xl" />
+                <FontAwesomeIcon icon={faUsers} className="text-xl sm:text-2xl" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Total Employees</p>
@@ -148,10 +148,10 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-3 lg:p-6">
+          <div className="bg-white rounded-lg shadow-md p-3 sm:p-4 lg:p-6">
             <div className="flex items-center">
               <div className="p-3 rounded-full bg-green-100 text-green-600">
-                <FontAwesomeIcon icon={faUserCheck} className="text-2xl" />
+                <FontAwesomeIcon icon={faUserCheck} className="text-xl sm:text-2xl" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Active Employees</p>
@@ -160,10 +160,10 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-3 lg:p-6">
+          <div className="bg-white rounded-lg shadow-md p-3 sm:p-4 lg:p-6">
             <div className="flex items-center">
               <div className="p-3 rounded-full bg-red-100 text-red-600">
-                <FontAwesomeIcon icon={faUserTimes} className="text-2xl" />
+                <FontAwesomeIcon icon={faUserTimes} className="text-xl sm:text-2xl" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Inactive Employees</p>
@@ -174,23 +174,23 @@ export default function Dashboard() {
         </div>
 
         {/* Employee Management Section */}
-        <div className="bg-white w-full  rounded-lg shadow-md p-6  flex flex-col">
+        <div className="bg-white rounded-lg shadow-md p-3 sm:p-6">
         
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 flex-shrink-0">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 sm:mb-0">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-0">
               Employee Management
             </h2>
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={handlePrintEmployees}
-                className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 <FontAwesomeIcon icon={faPrint} className="mr-2" />
                 Print Employees
               </button>
               <Link
                 href="/dashboard/add"
-                className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="inline-flex items-center justify-center px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               >
                 <FontAwesomeIcon icon={faPlus} className="mr-2" />
                 Add Employee
@@ -199,7 +199,7 @@ export default function Dashboard() {
           </div>
 
           {/* Search and Filters */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 flex-shrink-0">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <div>
               <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-2">
                 Search by Name
@@ -247,7 +247,6 @@ export default function Dashboard() {
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-gray-900 bg-white"
-                style={{ border: '1px solid #d1d5db', borderRadius: '8px' }}
               >
                 <option value="All">All Status</option>
                 <option value="Active">Active</option>
@@ -257,14 +256,14 @@ export default function Dashboard() {
           </div>
 
           {/* Employee Table */}
-            <EmployeeTable
-              employees={employees}
-              onDelete={handleDeleteEmployee}
-              onToggleStatus={handleToggleStatus}
-              searchTerm={searchTerm}
-              genderFilter={genderFilter}
-              statusFilter={statusFilter}
-            />
+          <EmployeeTable
+            employees={employees}
+            onDelete={handleDeleteEmployee}
+            onToggleStatus={handleToggleStatus}
+            searchTerm={searchTerm}
+            genderFilter={genderFilter}
+            statusFilter={statusFilter}
+          />
             
         </div>
       </div>

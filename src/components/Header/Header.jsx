@@ -15,7 +15,7 @@ export default function Header({ setSidebarOpen }) {
   };
 
   return (
-    <header className="sticky w-full top-0 bg-white shadow-sm border-b border-gray-200  z-10">
+    <header className="sticky top-0 bg-white shadow-sm border-b border-gray-200 z-10 flex-shrink-0">
       <div className="flex items-center justify-between px-3 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center">
           <button

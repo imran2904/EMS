@@ -64,16 +64,17 @@ const BaseLayout = ({ children }) => {
   }
 
   return (
-    <div className="h-screen w-full flex bg-gray-50 overflow-hidden">
-      {/* Sidebar */}
+    <div className="min-h-screen w-full bg-gray-50">
+      {/* Fixed Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-      {/* Right side */}
-      <div className="flex flex-col flex-1 h-screen overflow-hidden">
+      {/* Main Content Area - with left margin on desktop to account for fixed sidebar */}
+      <div className="lg:ml-64 ">
+        {/* Sticky Header */}
         <Header setSidebarOpen={setSidebarOpen} />
 
-        {/* ONLY MAIN will scroll */}
-        <main className="flex-1 overflow-y-auto p-6">
+        {/* Scrollable Content */}
+        <main className="p-2 sm:p-4 lg:p-6">
           {children}
         </main>
       </div>

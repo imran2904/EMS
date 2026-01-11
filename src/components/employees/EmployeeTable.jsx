@@ -130,7 +130,7 @@ export default function EmployeeTable({
 
   return (
     <>
-      <div className="overflow-x-auto bg-white rounded-lg shadow-md">
+      <div className="overflow-x-auto  bg-white rounded-lg shadow-md">
         <table className="min-w-full   divide-y divide-gray-200">
           <thead className="bg-gray-50 text-nowrap">
             <tr>

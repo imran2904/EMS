@@ -35,15 +35,15 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
       {/* Sidebar */}
       <div
         className={`bg-white shadow-lg text-black flex flex-col transition-transform duration-300 
-  z-50 max-lg:fixed max-lg:inset-y-0 top-0 left-0
-  w-[230px] lg:w-[256px]
+  z-50 fixed inset-y-0 left-0
+  w-64
   h-screen
   flex-shrink-0
-  ${sidebarOpen ? "max-lg:translate-x-0" : "max-lg:-translate-x-full"}
+  ${sidebarOpen ? "translate-x-0" : "max-lg:-translate-x-full"}
   `}
       >
 
-        <div className="flex relative w-full items-center justify-start h-16 px-4 bg-gradient-to-r from-indigo-600 to-purple-600">
+        <div className="flex relative w-full items-center justify-start h-16 px-4 bg-gradient-to-r from-indigo-600 to-purple-600 flex-shrink-0">
           <div className="flex items-center">
             <FontAwesomeIcon icon={faUsers} className="text-white text-2xl mr-3" />
             <h1 className="text-white text-nowrap text-base lg:text-lg font-bold">EMS Dashboard</h1>
@@ -56,7 +56,7 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
           </button>
         </div>
 
-        <nav className=" px-3 py-6">
+        <nav className="flex-1 px-3 py-6 overflow-y-auto">
           <ul className="space-y-2">
             {navigation.map((item) => (
               <li key={item.name}>
