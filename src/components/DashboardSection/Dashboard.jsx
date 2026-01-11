@@ -136,7 +136,7 @@ export default function Dashboard() {
       <div className="h-full w-full flex flex-col space-y-6">
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 flex-shrink-0">
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="bg-white rounded-lg shadow-md p-3 lg:p-6">
             <div className="flex items-center">
               <div className="p-3 rounded-full bg-blue-100 text-blue-600">
                 <FontAwesomeIcon icon={faUsers} className="text-2xl" />
@@ -148,7 +148,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="bg-white rounded-lg shadow-md p-3 lg:p-6">
             <div className="flex items-center">
               <div className="p-3 rounded-full bg-green-100 text-green-600">
                 <FontAwesomeIcon icon={faUserCheck} className="text-2xl" />
@@ -160,7 +160,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="bg-white rounded-lg shadow-md p-3 lg:p-6">
             <div className="flex items-center">
               <div className="p-3 rounded-full bg-red-100 text-red-600">
                 <FontAwesomeIcon icon={faUserTimes} className="text-2xl" />
@@ -256,7 +256,6 @@ export default function Dashboard() {
           </div>
 
           {/* Employee Table */}
-          <div className="flex-1 w-full">
             <EmployeeTable
               employees={employees}
               onDelete={handleDeleteEmployee}
@@ -265,7 +264,7 @@ export default function Dashboard() {
               genderFilter={genderFilter}
               statusFilter={statusFilter}
             />
-          </div>
+            
         </div>
       </div>
   );

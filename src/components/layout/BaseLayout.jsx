@@ -47,14 +47,14 @@ const BaseLayout = ({ children }) => {
   }
 
   return (
-    <div className="h-screen w-full flex bg-gray-50">
+    <div className="min-h-screen w-full flex bg-gray-50 overflow-hidden">
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       
-      <div className="flex-1 w-full flex flex-col min-w-0 h-screen">
+      <div className="flex-1 flex flex-col h-screen overflow-hidden">
         <Header setSidebarOpen={setSidebarOpen} />
         
-        <main className="flex-1 w-full overflow-y-auto bg-gray-50">
-          <div className="p-3 sm:p-6 h-full w-full">
+        <main className="flex-1 overflow-y-auto bg-gray-50">
+          <div className="p-3 sm:p-6 h-full">
             {children}
           </div>
         </main>

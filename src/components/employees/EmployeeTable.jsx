@@ -129,115 +129,113 @@ export default function EmployeeTable({
 
   return (
     <>
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                  Employee
-                </th>
-                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                  Gender
-                </th>
-                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                  Date of Birth
-                </th>
-                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                  State
-                </th>
-                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                  Status
-                </th>
-                <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {filteredEmployees.map((employee) => (
-                <tr key={employee.id} className="hover:bg-gray-50">
-                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 h-10 w-10 sm:h-12 sm:w-12">
-                        <img
-                          className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover"
-                          src={employee.profileImage}
-                          alt={employee.fullName}
-                        />
-                      </div>
-                      <div className="ml-3 sm:ml-4">
-                        <div className="text-xs sm:text-sm font-medium text-gray-900">
-                          {employee.fullName}
-                        </div>
-                        <div className="text-xs text-gray-500">
-                          {employee.id}
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
-                    {employee.gender}
-                  </td>
-                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
-                    {formatDate(employee.dob)}
-                  </td>
-                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
-                    {employee.state}
-                  </td>
-                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
-                    <label className="flex items-center cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={employee.isActive}
-                        onChange={() => onToggleStatus(employee.id)}
-                        className="sr-only"
-                      />
-                      <div className={`relative inline-flex h-5 w-9 sm:h-6 sm:w-11 items-center rounded-full transition-colors ${
-                        employee.isActive ? 'bg-indigo-600' : 'bg-gray-200'
-                      }`}>
-                        <span className={`inline-block h-3 w-3 sm:h-4 sm:w-4 transform rounded-full bg-white transition-transform ${
-                          employee.isActive ? 'translate-x-5 sm:translate-x-6' : 'translate-x-1'
-                        }`} />
-                      </div>
-                      <span className={`ml-2 text-xs sm:text-sm ${
-                        employee.isActive ? 'text-green-600' : 'text-red-600'
-                      }`}>
-                        {employee.isActive ? 'Active' : 'Inactive'}
-                      </span>
-                    </label>
-                  </td>
-                  <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <div className="flex items-center space-x-1 sm:space-x-2">
-                      <Link
-                        href={`/dashboard/edit/${employee.id}`}
-                        className="text-indigo-600 hover:text-indigo-900 p-1 sm:p-2 rounded-lg hover:bg-indigo-50"
-                        title="Edit Employee"
-                      >
-                        <FontAwesomeIcon icon={faEdit} className="text-xs sm:text-sm" />
-                      </Link>
-                      <button
-                        onClick={() => handleDeleteClick(employee)}
-                        className="text-red-600 hover:text-red-900 p-1 sm:p-2 rounded-lg hover:bg-red-50"
-                        title="Delete Employee"
-                      >
-                        <FontAwesomeIcon icon={faTrash} className="text-xs sm:text-sm" />
-                      </button>
-                      <button
-                        onClick={() => handlePrintEmployee(employee)}
-                        className="text-gray-600 hover:text-gray-900 p-1 sm:p-2 rounded-lg hover:bg-gray-50"
-                        title="Print Employee"
-                      >
-                        <FontAwesomeIcon icon={faPrint} className="text-xs sm:text-sm" />
-                      </button>
-                    </div>
-                  </td>
+        <div className="overflow-x-auto bg-white rounded-lg shadow-md">
+            <table className="min-w-full text-nowrap divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Employee
+                  </th>
+                  <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Gender
+                  </th>
+                  <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Date of Birth
+                  </th>
+                  <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    State
+                  </th>
+                  <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Status
+                  </th>
+                  <th className=" px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Actions
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {filteredEmployees.map((employee) => (
+                  <tr key={employee.id} className="hover:bg-gray-50">
+                    <td className="px-3 sm:px-6 py-3">
+                      <div className="flex items-center">
+                        <div className="flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10">
+                          <img
+                            className="h-8 w-8 sm:h-10 sm:w-10 rounded-full object-cover"
+                            src={employee.profileImage}
+                            alt={employee.fullName}
+                          />
+                        </div>
+                        <div className="ml-2 sm:ml-3 min-w-0 flex-1">
+                          <div className="text-xs sm:text-sm font-medium text-gray-900 truncate">
+                            {employee.fullName}
+                          </div>
+                          <div className="text-xs text-gray-500 truncate">
+                            {employee.id}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-3 sm:px-6 py-3 text-xs sm:text-sm text-gray-900">
+                      {employee.gender}
+                    </td>
+                    <td className="px-3 sm:px-6 py-3 text-xs sm:text-sm text-gray-900">
+                      {formatDate(employee.dob)}
+                    </td>
+                    <td className="px-3 sm:px-6 py-3 text-xs sm:text-sm text-gray-900">
+                      {employee.state}
+                    </td>
+                    <td className="px-3 sm:px-6 py-3">
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={employee.isActive}
+                          onChange={() => onToggleStatus(employee.id)}
+                          className="sr-only"
+                        />
+                        <div className={`relative inline-flex h-4 w-7 sm:h-5 sm:w-9 items-center rounded-full transition-colors ${
+                          employee.isActive ? 'bg-indigo-600' : 'bg-gray-200'
+                        }`}>
+                          <span className={`inline-block h-2 w-2 sm:h-3 sm:w-3 transform rounded-full bg-white transition-transform ${
+                            employee.isActive ? 'translate-x-4 sm:translate-x-5' : 'translate-x-1'
+                          }`} />
+                        </div>
+                        <span className={`ml-1 sm:ml-2 text-xs ${
+                          employee.isActive ? 'text-green-600' : 'text-red-600'
+                        }`}>
+                          {employee.isActive ? 'Active' : 'Inactive'}
+                        </span>
+                      </label>
+                    </td>
+                    <td className="px-3 sm:px-6 py-3">
+                      <div className="flex items-center space-x-1">
+                        <Link
+                          href={`/dashboard/edit/${employee.id}`}
+                          className="text-indigo-600 hover:text-indigo-900 p-1 rounded hover:bg-indigo-50"
+                          title="Edit Employee"
+                        >
+                          <FontAwesomeIcon icon={faEdit} className="text-xs" />
+                        </Link>
+                        <button
+                          onClick={() => handleDeleteClick(employee)}
+                          className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50"
+                          title="Delete Employee"
+                        >
+                          <FontAwesomeIcon icon={faTrash} className="text-xs" />
+                        </button>
+                        <button
+                          onClick={() => handlePrintEmployee(employee)}
+                          className="text-gray-600 hover:text-gray-900 p-1 rounded hover:bg-gray-50"
+                          title="Print Employee"
+                        >
+                          <FontAwesomeIcon icon={faPrint} className="text-xs" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
         </div>
-      </div>
 
       <ConfirmModal
         isOpen={deleteModal.isOpen}
