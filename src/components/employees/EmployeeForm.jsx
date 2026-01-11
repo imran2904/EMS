@@ -63,10 +63,20 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
       }
 
       try {
+        console.log('Processing image:', file.name, 'Size:', file.size);
         const base64 = await convertImageToBase64(file);
+        
+        // Check if base64 is too large
+        if (base64.length > 1000000) { // ~1MB base64 limit
+          showToast('Image too large after processing. Please use a smaller image.', 'error');
+          return;
+        }
+        
+        console.log('Image processed successfully, base64 length:', base64.length);
         setImagePreview(base64);
       } catch (error) {
-        showToast('Error processing image', 'error');
+        console.error('Error processing image:', error);
+        showToast('Error processing image. Please try a different image.', 'error');
       }
     }
   };
@@ -87,17 +97,28 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
         profileImage: imagePreview || (isEdit ? getEmployeeById(employeeId)?.profileImage : '')
       };
 
-      if (isEdit) {
-        updateEmployee(employeeId, employeeData);
-        showToast('Employee updated successfully!', 'success');
-      } else {
-        addEmployee(employeeData);
-        showToast('Employee added successfully!', 'success');
-      }
+      console.log('Attempting to save employee:', employeeData);
 
-      router.push('/dashboard');
+      if (isEdit) {
+        const result = updateEmployee(employeeId, employeeData);
+        if (result) {
+          showToast('Employee updated successfully!', 'success');
+          router.push('/dashboard');
+        } else {
+          throw new Error('Failed to update employee');
+        }
+      } else {
+        const result = addEmployee(employeeData);
+        if (result) {
+          showToast('Employee added successfully!', 'success');
+          router.push('/dashboard');
+        } else {
+          throw new Error('Failed to add employee');
+        }
+      }
     } catch (error) {
-      showToast('Error saving employee', 'error');
+      console.error('Error saving employee:', error);
+      showToast(`Error saving employee: ${error.message}`, 'error');
     }
 
     setIsLoading(false);

@@ -27,20 +27,46 @@ export const getEmployees = () => {
 };
 
 export const setEmployees = (employees) => {
-  localStorage.setItem(STORAGE_KEYS.EMPLOYEES, JSON.stringify(employees));
+  try {
+    const data = JSON.stringify(employees);
+    
+    // Check if data is too large for localStorage
+    if (data.length > 5000000) { // ~5MB limit
+      throw new Error('Data too large for storage. Try using smaller images.');
+    }
+    
+    localStorage.setItem(STORAGE_KEYS.EMPLOYEES, data);
+    console.log('Employees saved to localStorage successfully');
+  } catch (error) {
+    console.error('Error saving to localStorage:', error);
+    if (error.name === 'QuotaExceededError') {
+      throw new Error('Storage quota exceeded. Try using smaller images or clear some data.');
+    }
+    throw error;
+  }
 };
 
 export const addEmployee = (employee) => {
-  const employees = getEmployees();
-  const newEmployee = {
-    ...employee,
-    id: generateEmployeeId(),
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  };
-  employees.push(newEmployee);
-  setEmployees(employees);
-  return newEmployee;
+  try {
+    const employees = getEmployees();
+    const newEmployee = {
+      ...employee,
+      id: generateEmployeeId(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    
+    console.log('Adding new employee:', newEmployee);
+    
+    employees.push(newEmployee);
+    setEmployees(employees);
+    
+    console.log('Employee added successfully');
+    return newEmployee;
+  } catch (error) {
+    console.error('Error in addEmployee:', error);
+    throw new Error(`Failed to add employee: ${error.message}`);
+  }
 };
 
 export const updateEmployee = (id, updatedData) => {
@@ -72,11 +98,22 @@ export const getEmployeeById = (id) => {
 
 // Generate unique employee ID
 const generateEmployeeId = () => {
-  const employees = getEmployees();
-  const lastId = employees.length > 0 
-    ? Math.max(...employees.map(emp => parseInt(emp.id.split('-')[1]))) 
-    : 0;
-  return `EMP-${String(lastId + 1).padStart(4, '0')}`;
+  try {
+    const employees = getEmployees();
+    const lastId = employees.length > 0 
+      ? Math.max(...employees.map(emp => {
+          const idNum = parseInt(emp.id.split('-')[1]);
+          return isNaN(idNum) ? 0 : idNum;
+        })) 
+      : 0;
+    const newId = `EMP-${String(lastId + 1).padStart(4, '0')}`;
+    console.log('Generated new employee ID:', newId);
+    return newId;
+  } catch (error) {
+    console.error('Error generating employee ID:', error);
+    // Fallback to timestamp-based ID
+    return `EMP-${Date.now()}`;
+  }
 };
 
 // Seed initial data

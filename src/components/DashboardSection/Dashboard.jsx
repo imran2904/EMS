@@ -133,7 +133,7 @@ export default function Dashboard() {
   }
 
   return (
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
           <div className="bg-white rounded-lg shadow-md p-3 sm:p-4 lg:p-6">
@@ -174,7 +174,7 @@ export default function Dashboard() {
         </div>
 
         {/* Employee Management Section */}
-        <div className="bg-white rounded-lg shadow-md p-3 sm:p-6">
+        <div className="bg-white rounded-lg shadow-md p-3 sm:p-4 lg:p-6">
         
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
             <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-0">
