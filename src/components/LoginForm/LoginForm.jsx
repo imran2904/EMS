@@ -39,7 +39,7 @@ const LoginForm = () => {
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
         <div className="text-center mb-8">
           <div className="mx-auto w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mb-4">
-            <FontAwesomeIcon icon={faUsers} className="text-white text-2xl" />
+            <FontAwesomeIcon icon={faUsers} className="text-white  w-10 h-10" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900">Employee Management</h1>
           <p className="text-gray-600 mt-2">Sign in to your account</p>
@@ -52,7 +52,7 @@ const LoginForm = () => {
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FontAwesomeIcon icon={faEnvelope} className="text-gray-400" />
+                <FontAwesomeIcon icon={faEnvelope} className="text-gray-400 w-8 h-8" />
               </div>
               <input
                 {...register('email', {
@@ -79,7 +79,7 @@ const LoginForm = () => {
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FontAwesomeIcon icon={faLock} className="text-gray-400" />
+                <FontAwesomeIcon icon={faLock} className="text-gray-400  w-8 h-8" />
               </div>
               <input
                 {...register('password', {
@@ -107,7 +107,7 @@ const LoginForm = () => {
           >
             {isLoading ? (
               <div className="flex items-center justify-center">
-                <FontAwesomeIcon icon={faSpinner} spin className="mr-2" />
+                <FontAwesomeIcon icon={faSpinner} spin className="mr-2  w-8 h-8" />
                 Signing in...
               </div>
             ) : (
