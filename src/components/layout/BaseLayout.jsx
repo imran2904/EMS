@@ -30,25 +30,16 @@ const BaseLayout = ({ children }) => {
   const noLayoutPages = ['/login', '/'];
   const shouldShowLayout = isAuthenticated && !noLayoutPages.includes(router.pathname);
 
-  // Add/remove dashboard-layout class to body
-  useEffect(() => {
-    if (shouldShowLayout) {
-      document.body.classList.add('dashboard-layout');
-    } else {
-      document.body.classList.remove('dashboard-layout');
-    }
-
-    // Cleanup on unmount
-    return () => {
-      document.body.classList.remove('dashboard-layout');
-    };
-  }, [shouldShowLayout]);
-
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <FontAwesomeIcon icon={faSpinner} spin className="text-4xl text-indigo-600 mb-4" />
+          <FontAwesomeIcon 
+            icon={faSpinner} 
+            spin 
+            className="text-indigo-600 mb-4" 
+            style={{ width: '48px', height: '48px' }}
+          />
           <p className="text-gray-600">Loading...</p>
         </div>
       </div>
@@ -57,30 +48,29 @@ const BaseLayout = ({ children }) => {
 
   if (!shouldShowLayout) {
     return (
-      <div className="min-h-screen bg-gray-50" style={{ overflow: 'auto', height: 'auto' }}>
+      <div className="min-h-screen bg-gray-50">
         {children}
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen w-full bg-gray-50">
-      {/* Fixed Sidebar */}
+    <div className="min-h-screen bg-gray-50">
+      {/* Sidebar */}
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-      {/* Main Content Area - with left margin on desktop to account for fixed sidebar */}
-      <div className="lg:ml-64 ">
-        {/* Sticky Header */}
+      {/* Main content area */}
+      <div className="lg:pl-64">
+        {/* Header */}
         <Header setSidebarOpen={setSidebarOpen} />
 
-        {/* Scrollable Content */}
-        <main className="p-2 sm:p-4 lg:p-6">
+        {/* Page content */}
+        <main className="p-4 lg:p-6">
           {children}
         </main>
       </div>
     </div>
   );
-
 };
 
 export default BaseLayout;

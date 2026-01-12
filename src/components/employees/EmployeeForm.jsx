@@ -16,8 +16,6 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
-    watch,
     reset
   } = useForm({
     defaultValues: {
@@ -125,13 +123,17 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
+    <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow p-4 sm:p-6">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 flex items-center">
-          <FontAwesomeIcon icon={isEdit ? faUserEdit : faUserPlus} className="mr-3 text-indigo-600" />
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center">
+          <FontAwesomeIcon 
+            icon={isEdit ? faUserEdit : faUserPlus} 
+            className="mr-3 text-indigo-600" 
+            style={{ width: '24px', height: '24px' }}
+          />
           {isEdit ? 'Edit Employee' : 'Add New Employee'}
         </h2>
-        <p className="text-gray-600 mt-2">
+        <p className="text-gray-600 mt-2 text-sm sm:text-base">
           {isEdit ? 'Update employee information' : 'Fill in the details to add a new employee'}
         </p>
       </div>
@@ -142,8 +144,8 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Profile Image {!isEdit && <span className="text-red-500">*</span>}
           </label>
-          <div className="flex items-center space-x-6">
-            <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden mx-auto sm:mx-0">
               {imagePreview ? (
                 <img
                   src={imagePreview}
@@ -151,10 +153,14 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <FontAwesomeIcon icon={faUser} className="text-gray-400 text-2xl" />
+                <FontAwesomeIcon 
+                  icon={faUser} 
+                  className="text-gray-400" 
+                  style={{ width: '28px', height: '28px' }}
+                />
               )}
             </div>
-            <div>
+            <div className="text-center sm:text-left">
               <input
                 type="file"
                 accept="image/*"
@@ -164,9 +170,13 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
               />
               <label
                 htmlFor="profileImage"
-                className="cursor-pointer bg-white border border-gray-300 rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="cursor-pointer bg-white border border-gray-300 rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 inline-flex items-center"
               >
-                <FontAwesomeIcon icon={faUpload} className="mr-2" />
+                <FontAwesomeIcon 
+                  icon={faUpload} 
+                  className="mr-2" 
+                  style={{ width: '16px', height: '16px' }}
+                />
                 {imagePreview ? 'Change Image' : 'Upload Image'}
               </label>
               <p className="text-xs text-gray-500 mt-1">PNG, JPG up to 5MB</p>
@@ -189,7 +199,7 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
             })}
             type="text"
             id="fullName"
-            className="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-gray-900 bg-white placeholder-gray-500"
+            className="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
             placeholder="Enter full name"
           />
           {errors.fullName && (
@@ -202,7 +212,7 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Gender <span className="text-red-500">*</span>
           </label>
-          <div className="flex space-x-6">
+          <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-2 sm:space-y-0">
             {GENDER_OPTIONS.map((option) => (
               <label key={option.value} className="flex items-center">
                 <input
@@ -230,7 +240,7 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
             type="date"
             id="dob"
             max={new Date().toISOString().split('T')[0]}
-            className="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-gray-900 bg-white"
+            className="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
           />
           {errors.dob && (
             <p className="mt-1 text-sm text-red-600">{errors.dob.message}</p>
@@ -245,7 +255,7 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
           <select
             {...register('state', { required: 'State is required' })}
             id="state"
-            className="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-gray-900 bg-white"
+            className="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
           >
             <option value="">Select a state</option>
             {STATES.map((state) => (
@@ -276,23 +286,31 @@ export default function EmployeeForm({ employeeId = null, isEdit = false }) {
           <button
             type="button"
             onClick={() => router.push('/dashboard')}
-            className="px-3 sm:px-6 py-2 text-sm sm:text-base border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500"
+            className="px-4 sm:px-6 py-2 text-sm border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isLoading}
-            className="px-3 sm:px-6 text-sm sm:text-base py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 sm:px-6 py-2 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center"
           >
             {isLoading ? (
-              <div className="flex items-center">
-                <FontAwesomeIcon icon={faSpinner} className="mr-2 animate-spin" />
+              <>
+                <FontAwesomeIcon 
+                  icon={faSpinner} 
+                  className="mr-2 animate-spin" 
+                  style={{ width: '16px', height: '16px' }}
+                />
                 {isEdit ? 'Updating...' : 'Adding...'}
-              </div>
+              </>
             ) : (
               <>
-                <FontAwesomeIcon icon={isEdit ? faSave : faPlus} className="mr-2" />
+                <FontAwesomeIcon 
+                  icon={isEdit ? faSave : faPlus} 
+                  className="mr-2" 
+                  style={{ width: '16px', height: '16px' }}
+                />
                 {isEdit ? 'Update Employee' : 'Add Employee'}
               </>
             )}
