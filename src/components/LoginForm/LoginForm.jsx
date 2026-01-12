@@ -52,7 +52,7 @@ const LoginForm = () => {
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FontAwesomeIcon icon={faEnvelope} className="text-gray-400 w-8 h-8" />
+                <FontAwesomeIcon icon={faEnvelope} className="text-gray-400 w-6 h-6" />
               </div>
               <input
                 {...register('email', {
